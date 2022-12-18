@@ -1,6 +1,7 @@
 import MyHeader from "../components/MyHeader";
 import MyButton from "../components/MyButton"
 import {useState} from 'react';
+import MyIndex from "../components/MyIndex";
 
 const MainPage = () =>{
 
@@ -12,6 +13,7 @@ const MainPage = () =>{
             todayDate = {`Today : ${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월`} 
             rightChild = {<MyButton text = "관리자" type = "default"/>}
         />
+        <MyIndex/>
     </div>
     );
 }
