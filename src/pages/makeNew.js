@@ -1,4 +1,4 @@
-const makeNew = () => {
+const MakeNew = () => {
     return(
         <div className="makeNew">
             <h2>makeNew</h2>
@@ -6,4 +6,4 @@ const makeNew = () => {
     );
 };
 
-export default makeNew;
+export default MakeNew;

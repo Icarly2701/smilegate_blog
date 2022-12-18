@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-const blogPage = () => {
+const BlogPage = () => {
     const {id} = useParams();
 
     return (
@@ -11,4 +11,4 @@ const blogPage = () => {
     );
 };
 
-export default blogPage;
+export default BlogPage;

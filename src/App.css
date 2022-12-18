@@ -30,3 +30,70 @@ body {
   padding-left: 20px;
   padding-right: 20px;
 }
+
+/* mybutton */
+
+.MyButton {
+  cursor : pointer;
+  border : none;
+  border-radius:5px;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  font-size: 15px;
+
+  white-space: nowrap;
+
+}
+
+.MyButton_default {
+  background-color: #ececec;
+  color: black;
+}
+
+.MyButton_Good {
+  background-color: #64c964;
+  color: white;
+}
+
+.MyButton_Bad {
+  background-color: #fd565f;
+  color: white;
+}
+
+/* HEADER */
+
+header {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+header>div {
+  display: flex;
+}
+
+header .head_title {
+  width: 50%;
+  font-size: 25px;
+  justify-content: center;
+}
+
+
+
+header .head_right_btn {
+  width: 25%;
+  justify-content: end;
+}
+
+header .today_date{
+  width:25%;
+  font-size: 10px;
+  padding-bottom: 20px;
+}

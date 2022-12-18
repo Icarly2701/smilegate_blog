@@ -1,21 +1,20 @@
 import './App.css';
 import { BrowserRouter ,Routes, Route} from 'react-router-dom';
 
-import blogPage from './pages/blogPage';
-import editPage from './pages/editPage';
-import mainPage from './pages/mainPage';
-import makeNew from './pages/makeNew';
+import BlogPage from './pages/BlogPage';
+import EditPage from './pages/EditPage';
+import MainPage from './pages/MainPage';
+import MakeNew from './pages/MakeNew';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <h2>App.js</h2>
         <Routes>
-          <Route path = '/' element = {<mainPage/>} />
-          <Route path = '/new' element = {<makeNew/>} />
-          <Route path = '/edit' element = {<editPage/>} />
-          <Route path = '/post/:id' element = {<blogPage/>} />
+          <Route path = '/' element = {<MainPage/>} />
+          <Route path = '/new' element = {<MakeNew/>} />
+          <Route path = '/edit' element = {<EditPage/>} />
+          <Route path = '/post/:id' element = {<BlogPage/>} />
 
         </Routes>
       </div>
