@@ -8,7 +8,7 @@ const PostEditMake = ({isEdit, originData}) => {
     const navigate = useNavigate();
     const [curDate, setCurDate] = useState(new Date());
     const TodayDate =`Today : ${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월 ${curDate.getDate()}일`; 
-    const {onCreate, onEdit} = useContext(PostDispatchContext);
+    const {onCreate, onEdit, onRemove} = useContext(PostDispatchContext);
     const contentRef = useRef();
     const titleRef = useRef();
     const [title, setTitle] = useState("");
@@ -32,7 +32,14 @@ const PostEditMake = ({isEdit, originData}) => {
             }
             
             navigate('/', {replace:true});
-        };
+    };
+
+    const handleRemove = () => {
+        if(window.confirm("정말 이 포스트를 삭제하겠습니까?")){
+            onRemove(originData.id);
+        }
+        navigate('/', {replace:true});
+    }
 
     useEffect(() => {
         if(isEdit){
@@ -50,6 +57,9 @@ const PostEditMake = ({isEdit, originData}) => {
                 }
                 headTitle = {isEdit ? "Edit Post" : "New Post!"}
                 todayDate = {TodayDate}
+                rightChild={
+                    <MyButton text={"삭제하기"} type={"Bad"} onClick = {handleRemove}/>
+                }
             />
             <div>
                 <section>

@@ -17,6 +17,7 @@ const EditPage = () => {
             if(targetPost){
                 setOriginData(targetPost);
             }else{
+                alert("없는 포스트 입니다!");
                 navigate('/', {replace:true});
             }
         }
