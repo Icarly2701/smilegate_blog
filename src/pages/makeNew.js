@@ -1,7 +1,8 @@
+import PostEditMake from "../components/PostEditMake";
 const MakeNew = () => {
-    return(
-        <div className="makeNew">
-            <h2>makeNew</h2>
+    return (
+        <div>
+            <PostEditMake />
         </div>
     );
 };

@@ -46,8 +46,8 @@ const PostList = ({postList}) =>{
                     <ControlMenu value = {sortType} onChange = {setSortType} 
                     optionList = {sortOptionList}/>
                 </div>
+                <div className="center_text">메인 포스트</div>    
                 <div className="right_col">
-                    메인 포스트
                     <MyButton type={"Good"} text = {"New Post"} onClick = {() => navigate('/new')}/>
                 </div>
             </div>

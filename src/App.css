@@ -69,14 +69,19 @@ body {
 header {
   padding-top: 20px;
   padding-bottom: 20px;
-
   display: flex;
   align-items: center;
   border-bottom: 1px solid #e2e2e2;
 }
 
+
 header>div {
   display: flex;
+}
+
+header .head_left_child{
+  display:block;
+  width: 25%;
 }
 
 header .head_title {
@@ -84,17 +89,13 @@ header .head_title {
   font-size: 25px;
   justify-content: center;
 }
-
-
-
 header .head_right_btn {
   width: 25%;
   justify-content: end;
 }
 
 header .today_date{
-  width:25%;
-  font-size: 10px;
+  font-size: 14px;
   padding-bottom: 20px;
 }
 
@@ -108,11 +109,18 @@ header .today_date{
 }
 
 .PostList .menu_wrapper .right_col{
-  flex-grow: 0.5;
+  flex-grow: 0.1;
+  display: flex;
+}
+
+.PostList .center_text{
+  font-size: 25px;
+  font-weight: bold;
 }
 
 .PostList .menu_wrapper .right_col button {
   width: 30%;
+  flex-grow: 1;
 }
 
 .PostList .ControlMenu{
@@ -164,4 +172,59 @@ header .today_date{
 
 .PostItem .btn_wrapper{
   min-width: 70px;
+}
+
+/* PostEditMake */
+
+.PostEditMake{
+
+}
+
+.PostEditMake section{
+  margin-bottom: 40px;
+}
+
+.PostEditMake h4{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.PostEditMake .content_area textarea{
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 200px;
+  font-size: 20px;
+  resize: vertical;
+
+  border: none;
+  border-radius: 5px;
+  background-color: #ececec;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.PostEditMake .title_area textarea{
+  box-sizing: border-box;
+  width: 40%;
+  min-height: 50px;
+  font-size: 15px;
+  resize:horizontal;
+
+  border: none;
+  border-radius: 5px;
+  background-color: #ececec;
+
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.PostEditMake .control_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
