@@ -31,8 +31,8 @@ const reducer = (state, action) => {
   return newState;
 }
 
-export const DiaryStateContext = React.createContext();
-export const DiaryDispatchContext = React.createContext();
+export const PostStateContext = React.createContext();
+export const PostDispatchContext = React.createContext();
 
 const dummyData = [
 
@@ -101,20 +101,20 @@ function App() {
   };
 
   return (
-    <DiaryStateContext.Provider value = {data}>
-      <DiaryDispatchContext.Provider value = {{onCreate, onEdit, onRemove}}>
+    <PostStateContext.Provider value = {data}>
+      <PostDispatchContext.Provider value = {{onCreate, onEdit, onRemove}}>
         <BrowserRouter>
           <div className="App">
             <Routes>
               <Route path = '/' element = {<MainPage/>} />
               <Route path = '/new' element = {<MakeNew/>} />
-              <Route path = '/edit' element = {<EditPage/>} />
+              <Route path = '/edit/:id' element = {<EditPage/>} />
               <Route path = '/post/:id' element = {<BlogPage/>} />
             </Routes>
           </div>
         </BrowserRouter>
-      </DiaryDispatchContext.Provider>
-    </DiaryStateContext.Provider>
+      </PostDispatchContext.Provider>
+    </PostStateContext.Provider>
   );
 }
 

@@ -2,11 +2,11 @@ import MyHeader from "../components/MyHeader";
 import MyButton from "../components/MyButton";
 import {useContext, useEffect, useState} from 'react';
 import PostList from "../components/PostList";
-import { DiaryDispatchContext, DiaryStateContext } from "../App";
+import { PostDispatchContext, PostStateContext } from "../App";
 
 const MainPage = () =>{
 
-    const postList = useContext(DiaryStateContext);
+    const postList = useContext(PostStateContext);
     
     const [data, setData] = useState([]);
     const [curDate, setCurDate] = useState(new Date());

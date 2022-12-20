@@ -2,13 +2,13 @@ import MyButton from "./MyButton";
 import MyHeader from "./MyHeader";
 import {useContext, useEffect, useState, useRef} from 'react';
 import { useNavigate } from "react-router-dom";
-import { DiaryDispatchContext } from "../App";
+import { PostDispatchContext } from "../App";
 
-const PostEditMake = () => {
+const PostEditMake = ({isEdit, originData}) => {
     const navigate = useNavigate();
     const [curDate, setCurDate] = useState(new Date());
     const TodayDate =`Today : ${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월 ${curDate.getDate()}일`; 
-    const {onCreate} = useContext(DiaryDispatchContext);
+    const {onCreate, onEdit} = useContext(PostDispatchContext);
     const contentRef = useRef();
     const titleRef = useRef();
     const [title, setTitle] = useState("");
@@ -24,9 +24,23 @@ const PostEditMake = () => {
             return;
         }
 
-        onCreate(content, title, curDate);
-        navigate('/', {replace:true})
-    };
+        if(window.confirm(isEdit ? "포스트를 수정하시겠습니까?" : "포스트를 작성하시겠습니까?"))
+            if(!isEdit){
+                onCreate(content, title, curDate);
+            }else{
+                onEdit(originData.id, title, content, curDate);
+            }
+            
+            navigate('/', {replace:true});
+        };
+
+    useEffect(() => {
+        if(isEdit){
+            setCurDate(new Date());
+            setContent(originData.content);
+            setTitle(originData.title);
+        }
+    } ,[isEdit, originData])
 
     return(
         <div className="PostEditMake">
@@ -34,7 +48,7 @@ const PostEditMake = () => {
                 <MyButton text = {"< 뒤로가기"}
                 onClick = {() => navigate(-1)}/>
                 }
-                headTitle = {"New Post!"}
+                headTitle = {isEdit ? "Edit Post" : "New Post!"}
                 todayDate = {TodayDate}
             />
             <div>

@@ -16,7 +16,7 @@ const PostItem = ({ id, content, date, title }) => {
                 </div>
                 <div className="info_down">
                     <div className = "info_content">{content.slice(0,25)}</div>
-                    <div className="btn_wrapper"><MyButton text = {"수정하기"} onClick = {() => navigate('/edit')}/></div>
+                    <div className="btn_wrapper"><MyButton text = {"수정하기"} onClick = {() => navigate(`/edit/${id}`)}/></div>
                 </div>
             </div>
         </div>
