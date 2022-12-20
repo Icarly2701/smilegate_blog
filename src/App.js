@@ -34,18 +34,51 @@ const reducer = (state, action) => {
 export const DiaryStateContext = React.createContext();
 export const DiaryDispatchContext = React.createContext();
 
+const dummyData = [
+
+  {
+    id:1,
+    content:"안녕하세요구르트",
+    title:"첫번째",
+    date: 1671516203560
+  },
+  {
+    id:2,
+    content:"안녕하세요구르트기로",
+    title:"두번째",
+    date: 1671516203562
+  },
+  {
+    id:3,
+    content:"안녕하세요구르트가로",
+    title:"세번째",
+    date: 1671516203564
+  },
+  {
+    id:4,
+    content:"안녕하세요구르트개로",
+    title:"네번째",
+    date: 1671516203566
+  },{
+    id:5,
+    content:"안녕하세요구르트개로개로",
+    title:"다섯번째",
+    date: 1671516203568
+  },
+]
+
+
 function App() {
-  const [data, dispatch] = useReducer(reducer, [])
+  const [data, dispatch] = useReducer(reducer, dummyData)
 
   const dataId = useRef(0);
-  
   //create
-  const onCreate = (content, title, img) => {
+  const onCreate = (content, title, date) => {
     dispatch({type:"CREATE", data:{
       id : dataId.current,
       title,
       content,
-      img,
+      date : new Date(date).getTime(),
       },
     });
     dataId.current += 1;
@@ -57,12 +90,12 @@ function App() {
   };
 
   //edit
-  const onEdit = (targetId, title, content, img) => {
+  const onEdit = (targetId, title, content, date) => {
     dispatch({type: "EDIT", data:{
       id: targetId,
       title,
       content,
-      img
+      date: new Date(date).getTime(),
       },
     });
   };

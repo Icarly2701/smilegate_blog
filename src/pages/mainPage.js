@@ -1,22 +1,28 @@
 import MyHeader from "../components/MyHeader";
 import MyButton from "../components/MyButton"
-import {useState} from 'react';
-import MyIndex from "../components/MyIndex";
+import {useContext, useEffect, useState} from 'react';
 import PostList from "../components/PostList";
+import { DiaryDispatchContext, DiaryStateContext } from "../App";
 
 const MainPage = () =>{
+
+    const postList = useContext(DiaryStateContext);
+    
     const [data, setData] = useState([]);
     const [curDate, setCurDate] = useState(new Date());
-    const curDate1 = new Date();
+    const TodayDate =`Today : ${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월 ${curDate.getDate()}일`; 
+   
+    useEffect(()=> {
+        setData(postList);
+    }, [PostList])
+    
     return(
-    <div className="mainPage">
-        <MyHeader  headTitle = {"스마일게이트"}
-            todayDate = {`Today : ${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월`} 
-            rightChild = {<MyButton text = "관리자" type = "default"/>}
-        />
-        <PostList postList = {data}/>
-
-    </div>
+        <div className="mainPage">
+            <MyHeader  headTitle = {"작은블로그"}
+                todayDate = {TodayDate}
+            />
+            <PostList postList={data}/>
+        </div>
     );
 }
 

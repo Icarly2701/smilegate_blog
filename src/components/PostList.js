@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MyButton from "./MyButton";
+import PostItem from "./PostItem";
 
 const sortOptionList = [
     { value: "latest", name: "최신순" },
@@ -22,45 +23,45 @@ const ControlMenu =React.memo(({ value, onChange, optionList }) => {
 const PostList = ({postList}) =>{
     const navigate = useNavigate();
     const [sortType, setSortType] = useState('latest');
-    
-    const getProcessedDiaryList = () => {
 
+    const getProcessedPostList = () => {
+        
         const compare = (a, b) => {
-            if (sortType === 'latest') {
+            if(sortType==='latest')
                 return parseInt(b.date) - parseInt(a.date);
-            } else {
+            else   
                 return parseInt(a.date) - parseInt(b.date);
-            }
-        }
-
+        };
+        
         const copyList = JSON.parse(JSON.stringify(postList));
-        const filteredList = filter === 'all' ? copyList : copyList.filter((it) => filterCallBack(it));
-        const sortedList = filteredList.sort(compare);
+        const sortedList = copyList.sort(compare);
         return sortedList;
-    };
+    }
 
     return(
         <div className="PostList">
+
             <div className="menu_wrapper">
                 <div className="left_col">
-                    <ControlMenu 
-                        value = {sortType}
-                        onChange = {setSortType}
-                        optionList = {sortOptionList}
-                    />
+                    <ControlMenu value = {sortType} onChange = {setSortType} 
+                    optionList = {sortOptionList}/>
                 </div>
-                <div className="righ_col">
-                    <MyButton type = {'Good'}
-                    text = {'New Post'}
-                    onClick = {() => navigate("/new")}
-                    />
+                <div className="right_col">
+                    메인 포스트
+                    <MyButton type={"Good"} text = {"New Post"} onClick = {() => navigate('/new')}/>
                 </div>
             </div>
-            {getProcessedDiaryList().map((it) => (
-                <PostItem key = {it.id} {...id}/>
+            
+            
+            {getProcessedPostList().map((it) => (
+                <PostItem key= {it.id} {...it} />
             ))}
         </div>
-    );
+    )
 }
+
+PostList.defaultProps = {
+    postList:[],
+};
 
 export default PostList;

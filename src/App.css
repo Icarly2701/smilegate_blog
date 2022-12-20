@@ -98,18 +98,70 @@ header .today_date{
   padding-bottom: 20px;
 }
 
-.MyIndex{
-  width: 15%;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
+/*PostList */
 
-  padding-top: 30px;
-  padding-bottom: 100%;
-  padding-right: 30px;
-  border-right: 1px solid #e2e2e2;
+.PostList .menu_wrapper{
+  margin-top:  20px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.mainIndex{
-  width: 50%;
+.PostList .menu_wrapper .right_col{
+  flex-grow: 0.5;
+}
+
+.PostList .menu_wrapper .right_col button {
+  width: 30%;
+}
+
+.PostList .ControlMenu{
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ececec;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.PostItem{
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+  border-bottom:  1px solid #e2e2e2;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.PostItem .info_wrapper{
+  flex-grow: 1;
+  margin-left: 20px;
+  cursor:pointer;
+}
+
+.PostItem .info_title{
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.PostItem .info_up{
+  display:flex;
+  justify-content: space-between;
+}
+
+.PostItem .info_down{
+  display:flex;
+  justify-content: space-between;
+}
+
+.PostItem .btn_wrapper{
+  min-width: 70px;
 }
