@@ -144,7 +144,7 @@ header .today_date{
 
   border-bottom:  1px solid #e2e2e2;
 
-  display: flex;
+  display: block;
   justify-content: space-between;
 }
 
@@ -170,8 +170,20 @@ header .today_date{
   justify-content: space-between;
 }
 
+.PostItem .info_content{
+  padding-top: 10px;
+}
+
 .PostItem .btn_wrapper{
   min-width: 70px;
+}
+
+.PostItem .PostCom{
+  display:flex;
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 100%;
+  justify-content: space-between;
 }
 
 /* PostEditMake */
@@ -262,4 +274,21 @@ header .today_date{
   font-size: 15px;
   padding: 20px;
   text-align: left;
+}
+
+/* PostComment */
+.PostComment {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.PostComment .new_comment{
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+}
+
+.PostComment .btn_subcomment{
+  margin-right: 20px;
 }
