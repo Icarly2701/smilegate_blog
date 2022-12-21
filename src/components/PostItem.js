@@ -1,14 +1,56 @@
 import { useNavigate } from "react-router-dom";
 import MyButton from "./MyButton";
-import React, {useState} from "react";
+import React, {useReducer, useState, useRef} from "react";
 import PostComment from "./PostComment";
 
+const reducer = (state, action) => {
+    let newState = [];
+    switch(action.type){
+        case 'INITCOMMIT' : {
+            return action.data;
+        }
+        case 'CREATECOMMIT' : {
+            newState = [action.data, ...state];
+            break;
+        }
+        case 'REMOVECOMMIT' : {
+            newState = state.filter((it) => it.id !== action.targetId);
+            break;
+        }
+        default:
+            return state;
+    }
+    return newState;
+}
+
+export const CommitStateContext = React.createContext();
+export const CommitDispatchContext = React.createContext();
 
 const PostItem = ({ id, content, date, title }) => {
+
+    const commitID = useRef(0);
+    const [commentData, dispatch] = useReducer(reducer, []);
     const [heart, setHeart] = useState(0);
     const strDate = new Date(parseInt(date)).toLocaleDateString();
     const navigate = useNavigate();
+
+    const onCreateCommit = (comment, writer) => {
+        dispatch({type:"CREATECOMMIT", data : {
+            id: commitID.current,
+            writer,
+            comment,
+            },
+        });
+        commitID.current += 1;
+    }
+
+    const onRemoveCommit = (targetId) => {
+        dispatch({type:"REMOVECOMMIT", targetId});
+    }
+
     return(
+        <CommitStateContext.Provider value = {commentData}>
+        <CommitDispatchContext.Provider value = {{onCreateCommit, onRemoveCommit}}>
         <div className="PostItem">
             <div className="info_wrapper">
                 <div className="info_up">
@@ -27,6 +69,8 @@ const PostItem = ({ id, content, date, title }) => {
                 <PostComment />
             </div>
         </div>
+        </CommitDispatchContext.Provider>
+        </CommitStateContext.Provider>
     );
 }
 
