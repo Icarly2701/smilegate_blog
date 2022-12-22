@@ -173,10 +173,25 @@ header .today_date{
 
 .PostItem .info_content{
   padding-top: 10px;
+  flex-grow: 0.8;
 }
 
 .PostItem .btn_wrapper{
   min-width: 70px;
+  display:flex;
+  justify-content: space-between;
+}
+
+.PostItem .love{
+  margin-right: 25px;
+}
+
+.PostItem p{
+  margin-right: 25px;
+}
+
+.PostItem .btn_edit{
+  padding-bottom: 10px;
 }
 
 .PostItem .PostCom{

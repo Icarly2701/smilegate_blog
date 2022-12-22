@@ -25,6 +25,12 @@ const reducer = (state, action) => {
       newState = state.map((it)=>it.id === action.data.id ? {...action.data} : it);
       break;
     }
+    case 'COMMENTCREATE' : {
+      newState = state.map((it)=>it.id === action.data.id ? {...action.data} : it);
+    }
+    case 'COMMENTREMOVE' : {
+      newState = state.filter((it) => it.commentId !== action.targetCommentId);
+    }
     default:
       return state;
   }
@@ -72,6 +78,7 @@ function App() {
   const [data, dispatch] = useReducer(reducer, dummyData)
 
   const dataId = useRef(6);
+  const commentId = useRef(0);
   //create
   const onCreate = (content, title, date) => {
     dispatch({type:"CREATE", data:{
@@ -79,6 +86,7 @@ function App() {
       title,
       content,
       date : new Date(date).getTime(),
+      comment: new Array(),
       },
     });
     dataId.current += 1;
@@ -100,6 +108,22 @@ function App() {
     });
   };
 
+  const onCommentCreate = (targetId,targetComment, write, commentText) => {
+    dispatch({type:"COMMENTCREATE", data:{
+      id: targetId,
+      comment : targetComment.push({id:commentId.current ,writer: write, comment: commentText}),
+    },
+    });
+    commentId.current+=1;
+  }
+
+  const onCommentRemove = (targetId, commentId) => {
+    dispatch({type:"COMMENTREMOVE", data:{
+      id: targetId,
+      commentId,
+    },
+    });
+  }
   return (
     <PostStateContext.Provider value = {data}>
       <PostDispatchContext.Provider value = {{onCreate, onEdit, onRemove}}>

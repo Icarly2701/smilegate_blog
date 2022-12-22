@@ -44,35 +44,50 @@ const PostItem = ({ id, content, date, title }) => {
         commitID.current += 1;
     }
 
+    const moveData = JSON.parse(JSON.stringify(commentData));
+
+    console.log(moveData);
+
     const onRemoveCommit = (targetId) => {
         dispatch({type:"REMOVECOMMIT", targetId});
     }
 
+    const moveBlog = () => {
+        navigate(`/post/${id}` , {state : { 
+        title: JSON.parse(JSON.stringify(commentData))
+        }
+        });
+    }
+
+    console.log(JSON.parse(JSON.stringify(commentData)).map((it) => (
+        {...it}
+    )));
     return(
         <CommitStateContext.Provider value = {commentData}>
-        <CommitDispatchContext.Provider value = {{onCreateCommit, onRemoveCommit}}>
-        <div className="PostItem">
-            <div className="info_wrapper">
-                <div className="info_up">
-                    <div className="info_title">{title}</div>
-                    <div className="info_date">{strDate}</div>
-                </div>
-                <div className="info_down">
-                    <div className = "info_content" onClick={() => navigate(`/post/${id}`, {commentData})}>{content.slice(0,25)}</div>
-                    
-                    <div className ="love" onClick={() => setHeart(heart+1)}>♥</div>
-                        <p>좋아요:  {heart}</p>
-                    <div className="btn_wrapper">
-                        <MyButton text = {"수정하기"} onClick = {() => navigate(`/edit/${id}`)}/>
+            <CommitDispatchContext.Provider value = {{onCreateCommit, onRemoveCommit}}>
+            <div className="PostItem">
+                <div className="info_wrapper">
+                    <div className="info_up">
+                        <div className="info_title">{title}</div>
+                        <div className="info_date">{strDate}</div>
+                    </div>
+                    <div className="info_down">
+                        <div className = "info_content" onClick={moveBlog}>{content.slice(0,25)}</div>
+                        <div className="btn_wrapper"> 
+                            <div className ="love" onClick={() => setHeart(heart+1)}>♥</div>
+                            <p>좋아요:  {heart}</p>
+                            <div className="btn_edit">
+                                <MyButton text = {"수정하기"} onClick = {() => navigate(`/edit/${id}`)}/>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
             
-            <div className="PostCom">
-                <PostComment />
+                <div className="PostCom">
+                    <PostComment />
+                </div>
             </div>
-        </div>
-        </CommitDispatchContext.Provider>
+            </CommitDispatchContext.Provider>
         </CommitStateContext.Provider>
     );
 }

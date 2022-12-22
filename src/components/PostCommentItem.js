@@ -24,6 +24,7 @@ const PostCommentItem = ({id, writer, comment}) =>{
             <div className="comment_Remove">
                 <MyButton text={"삭제하기"} type={'Bad'} onClick = {handleRemoveCommit}/>
             </div>
+            
         </div>
     );
 }

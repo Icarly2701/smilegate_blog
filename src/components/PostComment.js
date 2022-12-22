@@ -57,6 +57,7 @@ const PostComment = () => {
                     <MyButton text={"작성완료"} onClick = {handleCommit}/>
                 </div>
             </div>
+            
             <div className='comment_item'>
                 {getProcessedCommitList().map((it) => (
                     <PostCommentItem key = {it.id} {...it} />
