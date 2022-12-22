@@ -142,7 +142,7 @@ header .today_date{
   padding-top: 15px;
   padding-bottom: 15px;
 
-  border-bottom:  1px solid #e2e2e2;
+  border-bottom:  3px solid black;
 
   display: block;
   justify-content: space-between;
@@ -168,6 +168,7 @@ header .today_date{
 .PostItem .info_down{
   display:flex;
   justify-content: space-between;
+  border-bottom: 1px solid #ececec;
 }
 
 .PostItem .info_content{
@@ -278,17 +279,47 @@ header .today_date{
 
 /* PostComment */
 .PostComment {
-  display: flex;
+  display: block;
   width: 100%;
   justify-content: space-between;
+}
+.PostComment .new_wrapper{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.PostComment .writer{
+  margin-bottom: 10px;
 }
 
 .PostComment .new_comment{
   justify-content: space-between;
   display: flex;
   flex-direction: column;
+
 }
 
 .PostComment .btn_subcomment{
   margin-right: 20px;
+  margin-top: 10px;
+}
+
+.PostCommentItem{
+  margin-right: 20px;
+  margin-top: 10px;
+  border-top: 1px solid #ececec;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.PostCommentItem .comment_writer{
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 2.5;
+}
+
+.PostCommentItem .comment_Remove{
+  padding-top: 10px;
 }

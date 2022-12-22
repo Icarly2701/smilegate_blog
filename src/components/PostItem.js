@@ -58,10 +58,13 @@ const PostItem = ({ id, content, date, title }) => {
                     <div className="info_date">{strDate}</div>
                 </div>
                 <div className="info_down">
-                    <div className = "info_content" onClick={() => navigate(`/post/${id}`)}>{content.slice(0,25)}</div>
+                    <div className = "info_content" onClick={() => navigate(`/post/${id}`, {commentData})}>{content.slice(0,25)}</div>
+                    
                     <div className ="love" onClick={() => setHeart(heart+1)}>♥</div>
-                    <p>{heart}</p>
-                    <div className="btn_wrapper"><MyButton text = {"수정하기"} onClick = {() => navigate(`/edit/${id}`)}/></div>
+                        <p>좋아요:  {heart}</p>
+                    <div className="btn_wrapper">
+                        <MyButton text = {"수정하기"} onClick = {() => navigate(`/edit/${id}`)}/>
+                    </div>
                 </div>
             </div>
             

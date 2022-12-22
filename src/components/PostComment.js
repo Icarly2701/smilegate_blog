@@ -38,18 +38,15 @@ const PostComment = () => {
 
     return(   
         <div className="PostComment"> 
-                {getProcessedCommitList().map((it) => (
-                    <PostCommentItem key = {it.id} {...it} />
-                ))}
-
+            <div className="new_wrapper">
                 <div className="new_comment">
-                    <input 
+                    <input className='writer'
                     placeholder={"작성자 이름"}
                     ref ={writerRef}
                     value = {writer}
                     onChange = {(e) => {setWriter(e.target.value);}}
                     />
-                    <input 
+                    <textarea className='comment'
                     ref={commentRef}
                     placeholder={"댓글을 입력해주세요"}
                     value = {comment}
@@ -59,7 +56,12 @@ const PostComment = () => {
                 <div className='btn_subcomment'>
                     <MyButton text={"작성완료"} onClick = {handleCommit}/>
                 </div>
-
+            </div>
+            <div className='comment_item'>
+                {getProcessedCommitList().map((it) => (
+                    <PostCommentItem key = {it.id} {...it} />
+                ))}
+            </div>
         </div>
     );
 }

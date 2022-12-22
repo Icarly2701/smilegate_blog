@@ -4,7 +4,7 @@ import {PostStateContext } from "../App";
 import MyHeader from "../components/MyHeader";
 import MyButton from "../components/MyButton";
 
-const BlogPage = () => {
+const BlogPage = (commentList) => {
     const curDate = new Date();
     const TodayDate =`Today : ${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월 ${curDate.getDate()}일`; 
     
@@ -13,7 +13,7 @@ const BlogPage = () => {
     const navigate = useNavigate();
 
     const PostList = useContext(PostStateContext);
-    
+
     useEffect(() => {
         if(PostList.length >= 1){
             const targetPost = PostList.find((it) => parseInt(it.id) === parseInt(id))
@@ -25,6 +25,7 @@ const BlogPage = () => {
             }
         }
     },[id, PostList]);
+    
 
     if(!data){
         return <div className = "BlogPage">로딩중</div>;

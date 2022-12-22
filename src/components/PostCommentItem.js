@@ -21,8 +21,8 @@ const PostCommentItem = ({id, writer, comment}) =>{
                     {comment.slice(0,25)}
                 </div>
             </div>
-            <div className="commentRemove">
-                <MyButton text={"삭제하기"} onClick = {handleRemoveCommit}/>
+            <div className="comment_Remove">
+                <MyButton text={"삭제하기"} type={'Bad'} onClick = {handleRemoveCommit}/>
             </div>
         </div>
     );
