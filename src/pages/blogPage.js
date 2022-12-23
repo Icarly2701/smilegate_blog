@@ -1,7 +1,7 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {useContext, useEffect, useState} from 'react';
 import {PostStateContext } from "../App";
-import PostCommentItem from "../components/PostCommentItem";
+import PostComment from "../components/PostComment";
 import MyHeader from "../components/MyHeader";
 import MyButton from "../components/MyButton";
 
@@ -9,13 +9,16 @@ const BlogPage = () => {
     const curDate = new Date();
     const TodayDate =`Today : ${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월 ${curDate.getDate()}일`; 
     
-    const commentList = useLocation();
+    
     const {id} = useParams();
     const [data, setData] = useState();
     const navigate = useNavigate();
     const PostList = useContext(PostStateContext);
 
-    console.log(commentList.state.title);
+    const getProcessedCommitList = () => {
+        return JSON.parse(JSON.stringify(PostList[id-1].comment));
+    }
+
     useEffect(() => {
         if(PostList.length >= 1){
             const targetPost = PostList.find((it) => parseInt(it.id) === parseInt(id))
@@ -47,11 +50,7 @@ const BlogPage = () => {
             </section>
             <section>
                 <h4>이글의 댓글!</h4>
-                <div className='comment_item'>
-                {commentList.state.title.map((it) => (
-                    <PostCommentItem key = {it.id} {...it} />
-                ))}
-            </div>
+                <PostComment id = {id}/>
             </section>
         </div>
         );

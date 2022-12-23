@@ -26,14 +26,13 @@ const reducer = (state, action) => {
 export const CommitStateContext = React.createContext();
 export const CommitDispatchContext = React.createContext();
 
-const PostItem = ({ id, content, date, title }) => {
+const PostItem = ({ id, content, date, title, comment }) => {
 
     const commitID = useRef(0);
     const [commentData, dispatch] = useReducer(reducer, []);
     const [heart, setHeart] = useState(0);
     const strDate = new Date(parseInt(date)).toLocaleDateString();
     const navigate = useNavigate();
-
     const onCreateCommit = (comment, writer) => {
         dispatch({type:"CREATECOMMIT", data : {
             id: commitID.current,
@@ -46,22 +45,15 @@ const PostItem = ({ id, content, date, title }) => {
 
     const moveData = JSON.parse(JSON.stringify(commentData));
 
-    console.log(moveData);
-
     const onRemoveCommit = (targetId) => {
         dispatch({type:"REMOVECOMMIT", targetId});
     }
 
     const moveBlog = () => {
-        navigate(`/post/${id}` , {state : { 
-        title: JSON.parse(JSON.stringify(commentData))
-        }
-        });
+        navigate(`/post/${id}` 
+        );
     }
 
-    console.log(JSON.parse(JSON.stringify(commentData)).map((it) => (
-        {...it}
-    )));
     return(
         <CommitStateContext.Provider value = {commentData}>
             <CommitDispatchContext.Provider value = {{onCreateCommit, onRemoveCommit}}>
@@ -84,7 +76,7 @@ const PostItem = ({ id, content, date, title }) => {
                 </div>
             
                 <div className="PostCom">
-                    <PostComment />
+                    <PostComment id = {id}/>
                 </div>
             </div>
             </CommitDispatchContext.Provider>

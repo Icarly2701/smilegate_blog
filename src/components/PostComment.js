@@ -1,21 +1,20 @@
-import React,{useContext, useEffect, useState, useRef} from 'react';
+import React,{useContext, useState, useRef} from 'react';
+import { PostDispatchContext, PostStateContext } from '../App';
 import MyButton from './MyButton';
 import PostCommentItem from './PostCommentItem';
-import { CommitDispatchContext, CommitStateContext } from './PostItem';
 
-const PostComment = () => {
-    const commentList = useContext(CommitStateContext);
-    const {onCreateCommit} = useContext(CommitDispatchContext);
+const PostComment = ({id}) => {
+    const {onCommentCreate} = useContext(PostDispatchContext);
+    const commentList = useContext(PostStateContext);
+    console.log("asdfasd");
     const commentRef = useRef();
     const writerRef = useRef();
-    
-    const [commentData, setCommentData] = useState([]);
+
     const [writer, setWriter] = useState("");
     const [comment, setComment] = useState("");
 
-    useEffect(()=>{setCommentData(commentList)}, [commentList]);
-
     const handleCommit = () => {
+
         if(writer.length < 1){
             writerRef.current.focus();
             return;
@@ -26,14 +25,14 @@ const PostComment = () => {
         }
 
         if(window.confirm("댓글을 다시겠습니까?")){
-            onCreateCommit(comment, writer);
+            onCommentCreate(commentList[id-1].comment, writer, comment);
             setWriter("");
             setComment("");
         }
     }
 
     const getProcessedCommitList = () => {
-        return JSON.parse(JSON.stringify(commentData));
+        return JSON.parse(JSON.stringify(commentList[id-1].comment));
     }
 
     return(   

@@ -25,12 +25,6 @@ const reducer = (state, action) => {
       newState = state.map((it)=>it.id === action.data.id ? {...action.data} : it);
       break;
     }
-    case 'COMMENTCREATE' : {
-      newState = state.map((it)=>it.id === action.data.id ? {...action.data} : it);
-    }
-    case 'COMMENTREMOVE' : {
-      newState = state.filter((it) => it.commentId !== action.targetCommentId);
-    }
     default:
       return state;
   }
@@ -46,30 +40,38 @@ const dummyData = [
     id:1,
     content:"안녕하세요구르트",
     title:"첫번째",
-    date: 1671516203560
+    date: 1671516203560,
+    comment:[{commentId: 1, writer: '유성' ,comment : "d유성ㅅ유ㅓ"}],
   },
   {
     id:2,
     content:"안녕하세요구르트기로",
     title:"두번째",
-    date: 1671516203562
+    date: 1671516203562,
+    comment:[{commentId: 1, writer: '유성' ,comment : "d유성ㅅ유ㅓ"}],
   },
   {
     id:3,
     content:"안녕하세요구르트가로",
     title:"세번째",
-    date: 1671516203564
+    date: 1671516203564,
+    comment:[{commentId: 1, writer: '유성' ,comment : "d유성ㅅ유ㅓ"}],
+  
   },
   {
     id:4,
     content:"안녕하세요구르트개로",
     title:"네번째",
-    date: 1671516203566
+    date: 1671516203566,
+    comment:[{commentId: 1, writer: '유성' ,comment : "d유성ㅅ유ㅓ"}],
+  
   },{
     id:5,
     content:"안녕하세요구르트개로개로",
     title:"다섯번째",
-    date: 1671516203568
+    date: 1671516203568,
+    comment:[{commentId: 1, writer: '유성' ,comment : "d유성ㅅ유ㅓ"}],
+  
   },
 ]
 
@@ -86,7 +88,7 @@ function App() {
       title,
       content,
       date : new Date(date).getTime(),
-      comment: new Array(),
+      comment: [],
       },
     });
     dataId.current += 1;
@@ -108,25 +110,24 @@ function App() {
     });
   };
 
-  const onCommentCreate = (targetId,targetComment, write, commentText) => {
-    dispatch({type:"COMMENTCREATE", data:{
-      id: targetId,
-      comment : targetComment.push({id:commentId.current ,writer: write, comment: commentText}),
+  const onCommentCreate = (targetComment, write, commentText) => {
+    dispatch({type:"EDIT", data:{
+      comment : targetComment.push({commentId:commentId.current ,writer: write, comment: commentText}),
     },
     });
     commentId.current+=1;
   }
 
-  const onCommentRemove = (targetId, commentId) => {
-    dispatch({type:"COMMENTREMOVE", data:{
+  const onCommentRemove = (targetId, targetComment,commentId) => {
+    dispatch({type:"EDIT", data:{
       id: targetId,
-      commentId,
+      comment:targetComment.filter((it) => (it.id !== commentId)),
     },
     });
   }
   return (
     <PostStateContext.Provider value = {data}>
-      <PostDispatchContext.Provider value = {{onCreate, onEdit, onRemove}}>
+      <PostDispatchContext.Provider value = {{onCreate, onEdit, onRemove, onCommentCreate, onCommentRemove}}>
         <BrowserRouter>
           <div className="App">
             <Routes>

@@ -1,9 +1,9 @@
 import { useContext } from "react";
+import { PostDispatchContext } from "../App";
 import MyButton from "./MyButton";
-import { CommitDispatchContext } from "./PostItem";
 
 const PostCommentItem = ({id, writer, comment}) =>{
-    const {onRemoveCommit} = useContext(CommitDispatchContext)
+    const {onRemoveCommit} = useContext(PostDispatchContext)
 
     const handleRemoveCommit = () => {
         if(window.confirm("댓글을 삭제하겠습니까?")){
@@ -18,7 +18,7 @@ const PostCommentItem = ({id, writer, comment}) =>{
                     {writer}
                 </div>
                 <div className="comment_content">
-                    {comment.slice(0,25)}
+                    {comment}
                 </div>
             </div>
             <div className="comment_Remove">
