@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams } from "react-router-dom";
 import {useContext, useEffect, useState} from 'react';
 import {PostStateContext } from "../App";
 import PostComment from "../components/PostComment";
@@ -9,32 +9,31 @@ const BlogPage = () => {
     const curDate = new Date();
     const TodayDate =`Today : ${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월 ${curDate.getDate()}일`; 
     
-    
     const {id} = useParams();
     const [data, setData] = useState();
     const navigate = useNavigate();
     const PostList = useContext(PostStateContext);
-
-    const getProcessedCommitList = () => {
-        return JSON.parse(JSON.stringify(PostList[id-1].comment));
-    }
-
+    const [commentData, setcommentData] = useState([]);
+    
     useEffect(() => {
         if(PostList.length >= 1){
             const targetPost = PostList.find((it) => parseInt(it.id) === parseInt(id))
+            
             if(targetPost){
                 setData(targetPost);
+                setcommentData(targetPost.comment);
             }else{
                 alert("없는 포스트 입니다!");
                 navigate('/', {replace:true});
             }
         }
     },[id, PostList]);
-    
+
 
     if(!data){
         return <div className = "BlogPage">로딩중</div>;
     }else {
+        console.log(commentData);
         return (
         <div className= "BlogPage">
             <MyHeader headTitle={data.title.slice(0,10)}
@@ -50,7 +49,7 @@ const BlogPage = () => {
             </section>
             <section>
                 <h4>이글의 댓글!</h4>
-                <PostComment id = {id}/>
+                <PostComment commentOrigin={commentData} targetId = {id}/>
             </section>
         </div>
         );

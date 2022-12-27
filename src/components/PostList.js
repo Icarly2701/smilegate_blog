@@ -40,7 +40,6 @@ const PostList = ({postList}) =>{
 
     return(
         <div className="PostList">
-
             <div className="menu_wrapper">
                 <div className="left_col">
                     <ControlMenu value = {sortType} onChange = {setSortType} 

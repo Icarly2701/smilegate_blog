@@ -1,13 +1,13 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { PostDispatchContext } from "../App";
 import MyButton from "./MyButton";
 
-const PostCommentItem = ({id, writer, comment}) =>{
-    const {onRemoveCommit} = useContext(PostDispatchContext)
+const PostCommentItem = ({commentId, writer, comment,targetId}) =>{
+    const {onCommentRemove} = useContext(PostDispatchContext);
 
     const handleRemoveCommit = () => {
         if(window.confirm("댓글을 삭제하겠습니까?")){
-            onRemoveCommit(id);
+            onCommentRemove(targetId,commentId);
         }
     }
 

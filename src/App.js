@@ -14,7 +14,7 @@ const reducer = (state, action) => {
       return action.data;
     }
     case 'CREATE' : {
-      newState = [action.data, ...state];
+      newState = [...state,action.data];
       break;
     }
     case 'REMOVE' : {
@@ -23,6 +23,20 @@ const reducer = (state, action) => {
     }
     case 'EDIT' : {
       newState = state.map((it)=>it.id === action.data.id ? {...action.data} : it);
+      break;
+    }
+    case 'CREATECOMMENT' : {
+      let newData =  [];
+      newData = state.find((it) => it.id == action.data.id);
+      newData.comment = action.data.comment;
+      newState = state.map((it) => it.id === action.data.id ? {...newData} : it);
+      break;
+    }
+    case 'REMOVECOMMENT' : {
+      let newData = [];
+      newData = state.find((it) => it.id === action.data.id);
+      newData.comment = newData.comment.filter((it) => it.commentId !== action.data.commentId);
+      newState = state.map((it)=>it.id === action.data.id ? {...newData} : it);
       break;
     }
     default:
@@ -34,61 +48,19 @@ const reducer = (state, action) => {
 export const PostStateContext = React.createContext();
 export const PostDispatchContext = React.createContext();
 
-const dummyData = [
-
-  {
-    id:1,
-    content:"안녕하세요구르트",
-    title:"첫번째",
-    date: 1671516203560,
-    comment:[{commentId: 1, writer: '유성' ,comment : "d유성ㅅ유ㅓ"}],
-  },
-  {
-    id:2,
-    content:"안녕하세요구르트기로",
-    title:"두번째",
-    date: 1671516203562,
-    comment:[{commentId: 1, writer: '유성' ,comment : "d유성ㅅ유ㅓ"}],
-  },
-  {
-    id:3,
-    content:"안녕하세요구르트가로",
-    title:"세번째",
-    date: 1671516203564,
-    comment:[{commentId: 1, writer: '유성' ,comment : "d유성ㅅ유ㅓ"}],
-  
-  },
-  {
-    id:4,
-    content:"안녕하세요구르트개로",
-    title:"네번째",
-    date: 1671516203566,
-    comment:[{commentId: 1, writer: '유성' ,comment : "d유성ㅅ유ㅓ"}],
-  
-  },{
-    id:5,
-    content:"안녕하세요구르트개로개로",
-    title:"다섯번째",
-    date: 1671516203568,
-    comment:[{commentId: 1, writer: '유성' ,comment : "d유성ㅅ유ㅓ"}],
-  
-  },
-]
-
-
 function App() {
-  const [data, dispatch] = useReducer(reducer, dummyData)
+  const [data, dispatch] = useReducer(reducer, [])
 
-  const dataId = useRef(6);
+  const dataId = useRef(0);
   const commentId = useRef(0);
   //create
-  const onCreate = (content, title, date) => {
+  const onCreate = (content, title, date,comment) => {
     dispatch({type:"CREATE", data:{
       id : dataId.current,
       title,
       content,
       date : new Date(date).getTime(),
-      comment: [],
+      comment,
       },
     });
     dataId.current += 1;
@@ -110,21 +82,21 @@ function App() {
     });
   };
 
-  const onCommentCreate = (targetComment, write, commentText) => {
-    dispatch({type:"EDIT", data:{
-      comment : targetComment.push({commentId:commentId.current ,writer: write, comment: commentText}),
-    },
-    });
+  const onCommentCreate = (targetId, targetComment) => {
+    dispatch({type:"CREATECOMMENT", data:{
+      id:targetId,
+      comment:targetComment}});
     commentId.current+=1;
   }
 
-  const onCommentRemove = (targetId, targetComment,commentId) => {
-    dispatch({type:"EDIT", data:{
-      id: targetId,
-      comment:targetComment.filter((it) => (it.id !== commentId)),
+  const onCommentRemove = (targetId,commentId) => {
+    dispatch({type:"REMOVECOMMENT", data:{
+      id:targetId,
+      commentId : commentId,
     },
     });
   }
+  
   return (
     <PostStateContext.Provider value = {data}>
       <PostDispatchContext.Provider value = {{onCreate, onEdit, onRemove, onCommentCreate, onCommentRemove}}>

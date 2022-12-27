@@ -26,12 +26,12 @@ const PostEditMake = ({isEdit, originData}) => {
 
         if(window.confirm(isEdit ? "포스트를 수정하시겠습니까?" : "포스트를 작성하시겠습니까?"))
             if(!isEdit){
-                onCreate(content, title, curDate);
+                onCreate(content, title, curDate, new Array());
             }else{
                 onEdit(originData.id, title, content, curDate);
             }
             
-            navigate('/', {replace:true});
+        navigate('/', {replace:true});
     };
 
     const handleRemove = () => {
@@ -90,7 +90,6 @@ const PostEditMake = ({isEdit, originData}) => {
                         onClick = {handleSumbit}/>
                     </div>
                 </section>
-
             </div>
         </div>
     );

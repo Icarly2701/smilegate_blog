@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle&display=swap');
+
 body {
   background-color: wheat;
   display: flex;
@@ -11,6 +13,7 @@ body {
 @media(min-width : 650px){
   .App{
     width:640px;
+    font-family: 'Dongle', sans-serif;
   }
 }
 
@@ -37,13 +40,14 @@ body {
   cursor : pointer;
   border : none;
   border-radius:5px;
-
+  
+  font-family: 'Dongle', sans-serif;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 20px;
   padding-right: 20px;
 
-  font-size: 15px;
+  font-size: 20px;
 
   white-space: nowrap;
 
@@ -86,7 +90,7 @@ header .head_left_child{
 
 header .head_title {
   width: 50%;
-  font-size: 25px;
+  font-size: 40px;
   justify-content: center;
 }
 header .head_right_btn {
@@ -95,7 +99,7 @@ header .head_right_btn {
 }
 
 header .today_date{
-  font-size: 14px;
+  font-size: 23px;
   padding-bottom: 20px;
 }
 
@@ -104,6 +108,7 @@ header .today_date{
 .PostList .menu_wrapper{
   margin-top:  20px;
   margin-bottom: 30px;
+  
   display: flex;
   justify-content: space-between;
 }
@@ -114,12 +119,15 @@ header .today_date{
 }
 
 .PostList .center_text{
-  font-size: 25px;
+  font-size: 35px;
   font-weight: bold;
+  
 }
 
 .PostList .menu_wrapper .right_col button {
   width: 30%;
+  padding-left: 10px;
+  padding-right: 10px;
   flex-grow: 1;
 }
 
@@ -127,6 +135,8 @@ header .today_date{
   margin-right: 10px;
   border: none;
   border-radius: 5px;
+  
+  font-family: 'Dongle', sans-serif;
   background-color: #ececec;
 
   padding-top: 10px;
@@ -135,7 +145,7 @@ header .today_date{
   padding-right: 20px;
 
   cursor: pointer;
-  font-size: 18px;
+  font-size: 25px;
 }
 
 .PostItem{
@@ -155,7 +165,7 @@ header .today_date{
 }
 
 .PostItem .info_title{
-  font-size: 20px;
+  font-size: 40px;
   font-weight: bold;
   margin-bottom: 5px;
 }
@@ -173,6 +183,7 @@ header .today_date{
 
 .PostItem .info_content{
   padding-top: 10px;
+  font-size: 30px;
   flex-grow: 0.8;
 }
 
@@ -184,10 +195,12 @@ header .today_date{
 
 .PostItem .love{
   margin-right: 25px;
+  font-size: 30px;
 }
 
 .PostItem p{
   margin-right: 25px;
+  font-size: 20px;
 }
 
 .PostItem .btn_edit{
@@ -205,7 +218,6 @@ header .today_date{
 /* PostEditMake */
 
 .PostEditMake{
-
 }
 
 .PostEditMake section{
@@ -213,7 +225,7 @@ header .today_date{
 }
 
 .PostEditMake h4{
-  font-size: 20px;
+  font-size: 35px;
   font-weight: bold;
 }
 
@@ -221,9 +233,11 @@ header .today_date{
   box-sizing: border-box;
   width: 100%;
   min-height: 200px;
-  font-size: 20px;
+  font-size: 30px;
   resize: vertical;
-
+  
+  
+  font-family: 'Dongle', sans-serif;
   border: none;
   border-radius: 5px;
   background-color: #ececec;
@@ -238,9 +252,10 @@ header .today_date{
   box-sizing: border-box;
   width: 40%;
   min-height: 50px;
-  font-size: 15px;
   resize:horizontal;
-
+  
+  font-size: 35px;
+  font-family: 'Dongle', sans-serif;
   border: none;
   border-radius: 5px;
   background-color: #ececec;
@@ -306,6 +321,14 @@ header .today_date{
 
 .PostComment .writer{
   margin-bottom: 10px;
+  font-family: 'Dongle', sans-serif;
+  border: none;
+  border-radius: 5px;
+  background-color: #ececec;
+  cursor: pointer;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-top: 2.5px;
 }
 
 .PostComment .new_comment{
@@ -320,6 +343,17 @@ header .today_date{
   margin-top: 10px;
 }
 
+.PostComment .comment{
+  border: none;
+  border-radius: 5px;
+  background-color: #ececec;
+  cursor: pointer;
+  font-family: 'Dongle', sans-serif;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
 .PostCommentItem{
   margin-right: 20px;
   margin-top: 10px;
@@ -328,11 +362,14 @@ header .today_date{
   justify-content: space-between;
 }
 
-
 .PostCommentItem .comment_writer{
   font-weight: bold;
-  font-size: 15px;
-  line-height: 2.5;
+  font-size: 30px;
+  line-height: 2;
+}
+
+.PostCommentItem .comment_content{
+  font-size: 20px;
 }
 
 .PostCommentItem .comment_Remove{

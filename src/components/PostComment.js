@@ -1,18 +1,24 @@
-import React,{useContext, useState, useRef} from 'react';
-import { PostDispatchContext, PostStateContext } from '../App';
+import React,{useContext, useState,useRef} from 'react';
+import { PostDispatchContext} from '../App';
 import MyButton from './MyButton';
 import PostCommentItem from './PostCommentItem';
 
-const PostComment = ({id}) => {
+const PostComment = ({commentOrigin, targetId}) => {
     const {onCommentCreate} = useContext(PostDispatchContext);
-    const commentList = useContext(PostStateContext);
-    console.log("asdfasd");
+    const commentId = useRef(0);
     const commentRef = useRef();
     const writerRef = useRef();
 
     const [writer, setWriter] = useState("");
     const [comment, setComment] = useState("");
 
+    const getProcessedCommentList = () => {
+        const copyList = JSON.parse(JSON.stringify(commentOrigin));
+        return copyList;
+    }
+
+    let copyList = getProcessedCommentList();
+    
     const handleCommit = () => {
 
         if(writer.length < 1){
@@ -25,15 +31,14 @@ const PostComment = ({id}) => {
         }
 
         if(window.confirm("댓글을 다시겠습니까?")){
-            onCommentCreate(commentList[id-1].comment, writer, comment);
+            copyList.push({commentId:commentId.current ,writer: writer, comment: comment} );
+            onCommentCreate(targetId,copyList);
             setWriter("");
             setComment("");
+            commentId.current+=1;
         }
     }
 
-    const getProcessedCommitList = () => {
-        return JSON.parse(JSON.stringify(commentList[id-1].comment));
-    }
 
     return(   
         <div className="PostComment"> 
@@ -58,9 +63,11 @@ const PostComment = ({id}) => {
             </div>
             
             <div className='comment_item'>
-                {getProcessedCommitList().map((it) => (
-                    <PostCommentItem key = {it.id} {...it} />
-                ))}
+                {   
+                    copyList.map((it) => (
+                        <PostCommentItem key={it.commentId}{...it} targetId = {targetId}/>
+                    ))
+                }
             </div>
         </div>
     );
